@@ -1,4 +1,7 @@
-{% extends "panel/base.html" %} {% load static %} {% block content %} {% include "panel/header.html" %}
+{% extends "panel/base.html" %} 
+{% load static %} 
+{% block content %} 
+{% include "panel/header.html" %}
 
 <!-- SECTION -->
 <div class="section">
@@ -29,7 +32,32 @@
                     <a href="{% url 'add-to-cart' product.slug %}">J'achète</a>
                 </button>
             </div>
-            <div class="col-md-4 col-xs-6 text-center">
+            <div class="col-md-4 col-xs-6 text-center cart-area-color">
+                <h3>Information(s) panier</h3>
+                <br />
+                {% for order in order %}
+                {% if order.quantity < 1 %}
+                <p>
+                    <span style="font-weight : bold"> Article </span> : {{ product.name }}
+                </p>
+                <p>
+                    <span style="font-weight : bold"> Qté </span> : 0
+                </p>
+                <p>
+                    <span style="font-weight : bold"> Nbre article(s) panier </span> : {{ user.cart.orders.count }}
+                </p>
+                {% else %}
+                <p>
+                    <span style="font-weight : bold"> Article </span> : {{ product.name }}
+                </p>
+                <p>
+                    <span style="font-weight : bold"> Qté </span> : {{ order.quantity }}
+                </p>
+                <p>
+                    <span style="font-weight : bold"> Nbre article(s) panier </span> : {{ user.cart.orders.count }}
+                </p>
+                {% endif %}
+                {% endfor %}
             </div>
 
             <!-- /article -->
