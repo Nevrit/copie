@@ -1,0 +1,68 @@
+{% extends "panel/base.html" %} {% load static %} {% block content %} {% include "panel/header.html" %}
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- article -->
+            <div class="col-md-6 col-xs-6 l">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <h4 class="text-center">S'il vous plaît connectez-vous à votre compte</h4>
+                    <div class="form-group">
+                        <label for="username">Nom d'utilisateur :</label>
+                        <input type="text" class="form-control" id="first_name" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe :</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Se connecter</button>
+                        <p style="margin-top: 10px">
+                            <a href="">Mot de passe oublié ?</a>
+                        </p>
+                        <p style="margin-top: 10px">Pas encore de compte ?
+                            <a href="{% url 'signup' %}">Inscrivez vous !</a>
+                        </p>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="col-md-6 col-xs-6 box-shadow">
+                <h2>
+                    Nouveau client ?
+                </h2>
+                <h4>Créez un compte chez nous et vous pourrez :</h4>
+                <p>
+                    <br>
+                    <ul class="display-list-style">
+                        <li>
+                            Payer plus vite
+                        </li>
+                        <li>
+                            Enregistrer plusieurs frais d'expédition
+                        </li>
+                        <li>
+                            Accéder à l'historique de vos commandes
+                        </li>
+                        <li>
+                            Suivre les nouvelles commandes
+                        </li>
+                        <li>
+                            Enregistrer des articles dans votre liste de souhaits
+                        </li>
+                    </ul>
+                </p>
+            </div>
+            <!-- /article -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+{% include "panel/footer.html" %} {% endblock content %}

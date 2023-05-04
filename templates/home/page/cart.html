@@ -1,0 +1,24 @@
+{% extends "panel/base.html" %} {% load static %} {% block content %} {% include "panel/header.html" %}
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row gy-4 align-items-center">
+            <!-- article -->
+            {% for order in orders  %}
+            <h2>{{ order.product.name }}</h2>
+            <img src="{{ order.product.image.url }}" alt="{{ order.product.name }}" style="max-width: 250px;"> <br />
+            <p>La quantité disponible est de : {{ order.quantity }}</p>
+            {% endfor %}
+            
+            
+            <!-- /article -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+{% include "panel/footer.html" %} {% endblock content %}

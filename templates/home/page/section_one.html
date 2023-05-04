@@ -1,0 +1,30 @@
+{% load static %}
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- shop -->
+            {% for product in product|slice:":3" %}
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img src='{{ product.image.url }}' alt="Image manettes & console">
+                    </div>
+                    <div class="shop-body">
+                        <h3> {{ product.name }} </h3>
+                        <a href="{% url 'products_description' product.slug %}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- /shop -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

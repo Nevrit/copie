@@ -1,0 +1,89 @@
+{% extends "panel/base.html" %} {% load static %} {% block content %} {% include "panel/header.html" %}
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row gy-4 align-items-center">
+            <!-- article -->
+            <div class="col-md-4 col-xs-6">
+                <img src=" {{ product.image.url }} " class="img-fluid" width="100%" alt="{{ product.name }}" />
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <h2>
+                    {{ product.name}}
+                </h2>
+                <h4> {{ product.title }} </h4>
+                <p class="product-rating" style="border-bottom: 1px solid #E97777;">Marque : {{ product.category.mark }} <br />
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </p>
+                <!-- <p> {{ product.description|safe }} </p> -->
+                <p style="font-size: 2em;"> {{ product.price }} FCFA <br /> <del style="font-size: 0.7em; color: #8E806A;" class="product-old-price">{{ product.old_price }}FCFA</del></p>
+                <p style="font-size: 0.8em; color: #E21818;">{{ product.stock_quantity }} articles restant en stock</p>
+                <button type="button" class="btn btn-primary mt-5" style="width: 100%;">
+                    <a href="{% url 'add-to-cart' product.slug %}">J'achète</a>
+                </button>
+            </div>
+            <div class="col-md-4 col-xs-6 text-center">
+            </div>
+
+            <!-- /article -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row gy-4 align-items-center text-center">
+            <!-- article -->
+            <h3>Details de l'article</h3>
+            <p>{{ product.description | safe }}</p>
+            <!-- /article -->
+            <p>{{ product.technical_information | safe }}</p>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- shop -->
+            {% for product in product_details|slice:":3" %}
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img src='{{ product.image.url }}' alt="Image manettes & console">
+                    </div>
+                    <div class="shop-body">
+                        <h3> {{ product.name }} </h3>
+                        <!-- <a href="{% url 'products_description' product.slug %}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a> -->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- /shop -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+{% include "panel/footer.html" %} {% endblock content %}
