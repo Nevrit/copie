@@ -2,6 +2,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from store.models import Cart, Order, Product
+from django.contrib import messages
+from django.shortcuts import redirect
+from Home.views import index 
 
 # Création des informations du panier
 def add_to_cart(request, slug):
@@ -28,4 +31,13 @@ def add_to_cart(request, slug):
 def cart(request):
     cart = get_object_or_404(Cart, user=request.user)
     return render(request, 'home/page/cart.html', context={"orders" : cart.orders.all()})
+
+
+def cart_delete(request):
+    cart = request.user.cart
+    if cart:
+        cart.orders.all().delete()
+        cart.delete()
+        messages.success(request, "L'élément a été supprimé du panier.")
+    return redirect(index)
 

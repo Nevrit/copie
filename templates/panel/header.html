@@ -71,6 +71,7 @@
 
                         <!-- Cart -->
                         <div>
+                            {% if user.cart %}
                             <a href="{% url 'cart' %}">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Votre panier</span>
@@ -78,6 +79,8 @@
                                     {{ user.cart.orders.count }}
                                 </div>
                             </a>
+                            {% endif %}
+                            
                         </div>
                         <!-- /Cart -->
 

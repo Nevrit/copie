@@ -28,9 +28,12 @@
                 <!-- <p> {{ product.description|safe }} </p> -->
                 <p style="font-size: 2em;"> {{ product.price }} FCFA <br /> <del style="font-size: 0.7em; color: #8E806A;" class="product-old-price">{{ product.old_price }}FCFA</del></p>
                 <p style="font-size: 0.8em; color: #E21818;">{{ product.stock_quantity }} articles restant en stock</p>
-                <button type="button" class="btn btn-primary mt-5" style="width: 100%;">
-                    <a href="{% url 'add-to-cart' product.slug %}">J'achète</a>
-                </button>
+                {% comment %} <button type="button" class="btn btn-primary mt-5" style="width: 100%;">
+                    <a href="{% url 'add-to-cart' product.slug %}"></a>
+                </button> {% endcomment %}
+                <a href="{% url 'add-to-cart' product.slug %}">
+                    <button type="button" class="btn btn-primary mt-5" style="width: 100%;">Ajouter au panier</button>
+                </a>
             </div>
             <div class="col-md-4 col-xs-6 text-center cart-area-color">
                 <h3>Information(s) panier</h3>
@@ -41,11 +44,10 @@
                     <p> <span style="font-weight:bold"> Prix </span>: {{ order.product.price }}</p>
                     <p> <span style="font-weight:bold"> Qté </span>: {{ order.quantity }}</p>
                     <br />
-                    <p>Prix panier : {{ total_price }}</p> 
-                    <br />
                     {% endfor %}
+                    <p> <span style="font-weight:bold"> Prix panier </span>: {{ total_price }}</p>
                     {% else %}
-                    <p>Votre panier est vide</p>
+                    <p> <span style="font-weight:bold"> Votre panier est vide </span> </p>
                 {% endif %}
                 
                 
