@@ -35,12 +35,20 @@
             <div class="col-md-4 col-xs-6 text-center cart-area-color">
                 <h3>Information(s) panier</h3>
                 <br />
-                {% for order in commande %}
-                <p> <span style="font-weight:bold"> Article </span>: {{ product.name }}</p>
-                <p> <span style="font-weight:bold"> Prix </span>: {{ order.product.price }}</p>
-                <p> <span style="font-weight:bold"> Qté </span>: {{ order.quantity }}</p>
-                <br />
-                {% endfor %}
+                {% if commande %}
+                    {% for order in commande %}
+                    <p> <span style="font-weight:bold"> Article </span>: {{ order.product.name }}</p>
+                    <p> <span style="font-weight:bold"> Prix </span>: {{ order.product.price }}</p>
+                    <p> <span style="font-weight:bold"> Qté </span>: {{ order.quantity }}</p>
+                    <br />
+                    <p>Prix panier : {{ total_price }}</p> 
+                    <br />
+                    {% endfor %}
+                    {% else %}
+                    <p>Votre panier est vide</p>
+                {% endif %}
+                
+                
 
                 
             </div>

@@ -10,7 +10,18 @@ def index(request):
 def products_description(request, slug):
     product = Product.objects.get(slug=slug)
     product_details = Product.objects.all()
-    commande = Order.objects.all()
     cart = Cart.objects.all()
-    context = {'product' : product, 'product_details' : product_details, 'commande' : commande, 'cart' : cart}
+    total_price = ''
+    
+    # Afficher la commande du client connecté
+    if request.user.is_authenticated:
+        commande = Order.objects.filter(user=request.user)
+        total_price = 0
+        for order in commande:
+            total_price += order.product.price * order.quantity
+    else:
+        commande = []
+    # Afficher la commande du client connecté
+        
+    context = {'product' : product, 'product_details' : product_details, 'commande' : commande, 'cart' : cart, 'total_price' : total_price}
     return render(request, 'home/page/products_details.html', context)
