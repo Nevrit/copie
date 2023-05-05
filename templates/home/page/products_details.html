@@ -35,29 +35,14 @@
             <div class="col-md-4 col-xs-6 text-center cart-area-color">
                 <h3>Information(s) panier</h3>
                 <br />
-                {% for order in order %}
-                {% if order.quantity < 1 %}
-                <p>
-                    <span style="font-weight : bold"> Article </span> : {{ product.name }}
-                </p>
-                <p>
-                    <span style="font-weight : bold"> Qté </span> : 0
-                </p>
-                <p>
-                    <span style="font-weight : bold"> Nbre article(s) panier </span> : {{ user.cart.orders.count }}
-                </p>
-                {% else %}
-                <p>
-                    <span style="font-weight : bold"> Article </span> : {{ product.name }}
-                </p>
-                <p>
-                    <span style="font-weight : bold"> Qté </span> : {{ order.quantity }}
-                </p>
-                <p>
-                    <span style="font-weight : bold"> Nbre article(s) panier </span> : {{ user.cart.orders.count }}
-                </p>
-                {% endif %}
+                {% for order in commande %}
+                <p> <span style="font-weight:bold"> Article </span>: {{ product.name }}</p>
+                <p> <span style="font-weight:bold"> Prix </span>: {{ order.product.price }}</p>
+                <p> <span style="font-weight:bold"> Qté </span>: {{ order.quantity }}</p>
+                <br />
                 {% endfor %}
+
+                
             </div>
 
             <!-- /article -->

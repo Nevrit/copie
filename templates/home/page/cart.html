@@ -1,4 +1,7 @@
-{% extends "panel/base.html" %} {% load static %} {% block content %} {% include "panel/header.html" %}
+{% extends "panel/base.html" %} 
+{% load static %} 
+{% block content %} 
+{% include "panel/header.html" %}
 
 <!-- SECTION -->
 <div class="section">
@@ -12,8 +15,6 @@
             <img src="{{ order.product.image.url }}" alt="{{ order.product.name }}" style="max-width: 250px;"> <br />
             <p>La quantité disponible est de : {{ order.quantity }}</p>
             {% endfor %}
-            
-            
             <!-- /article -->
         </div>
         <!-- /row -->

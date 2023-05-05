@@ -10,7 +10,7 @@ def index(request):
 def products_description(request, slug):
     product = Product.objects.get(slug=slug)
     product_details = Product.objects.all()
+    commande = Order.objects.all()
     cart = Cart.objects.all()
-    order = Order.objects.all()
-    context = {'product' : product, 'product_details' : product_details, 'cart' : cart, 'order' : order}
+    context = {'product' : product, 'product_details' : product_details, 'commande' : commande, 'cart' : cart}
     return render(request, 'home/page/products_details.html', context)
