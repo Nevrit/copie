@@ -32,7 +32,7 @@
                     <a href="{% url 'add-to-cart' product.slug %}"></a>
                 </button> {% endcomment %}
                 <a href="{% url 'add-to-cart' product.slug %}">
-                    <button type="button" class="btn btn-primary mt-5" style="width: 100%;">Ajouter au panier</button>
+                    <button type="button" class="btn btn-primary mt-5" style="width: 100%;border-radius:20px">Ajouter au panier</button>
                 </a>
             </div>
             <div class="col-md-4 col-xs-6 text-center cart-area-color">
@@ -45,7 +45,8 @@
                         <p><span style="font-weight:bold">Qté</span>: {{ order.quantity }}</p>
                         <form method="POST" action="{% url 'cart-article-delete' slug=order.product.slug %}">
                         {% csrf_token %}
-                        <button type="submit">Supprimer l'article</button>
+                        {% comment %} <button type="submit"></button> {% endcomment %}
+                        <button type="submit" class="btn btn-primary mt-5" style="border-radius:20px"><i class="fa-regular fa-trash"></i> Supprimer l'article</span></button>
                         </form>
                         <br>
                     {% endfor %}
