@@ -40,15 +40,21 @@
                 <br />
                 {% if commande %}
                     {% for order in commande %}
-                    <p> <span style="font-weight:bold"> Article </span>: {{ order.product.name }}</p>
-                    <p> <span style="font-weight:bold"> Prix </span>: {{ order.product.price }}</p>
-                    <p> <span style="font-weight:bold"> Qté </span>: {{ order.quantity }}</p>
-                    <br />
+                        <p><span style="font-weight:bold">Article</span>: {{ order.product.name }}</p>
+                        <p><span style="font-weight:bold">Prix</span>: {{ order.product.price }}</p>
+                        <p><span style="font-weight:bold">Qté</span>: {{ order.quantity }}</p>
+                        <form method="POST" action="{% url 'cart-article-delete' slug=order.product.slug %}">
+                        {% csrf_token %}
+                        <button type="submit">Supprimer l'article</button>
+                        </form>
+                        <br>
                     {% endfor %}
-                    <p> <span style="font-weight:bold"> Prix panier </span>: {{ total_price }}</p>
-                    {% else %}
-                    <p> <span style="font-weight:bold"> Votre panier est vide </span> </p>
+                    <p><span style="font-weight:bold">Prix panier</span>: {{ total_price }}</p>
+                    <a href="{% url 'cart-delete' %}"><span style="font-size: 1em;"><i class="fa-regular fa-trash"></i> Supprimer le panier</span></a>
+                {% else %}
+                    <p><span style="font-weight:bold">Votre panier est vide</span></p>
                 {% endif %}
+
                 
                 
 

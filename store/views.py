@@ -41,3 +41,20 @@ def cart_delete(request):
         messages.success(request, "L'élément a été supprimé du panier.")
     return redirect(index)
 
+def cart_article_delete(request, slug):
+    user = request.user
+    product = get_object_or_404(Product, slug=slug)
+    cart = get_object_or_404(Cart, user=user, orders__product=product)
+    order = get_object_or_404(Order, user=user, product=product)
+    
+    if order.quantity > 1:
+        order.quantity -= 1
+        order.save()
+    else:
+        cart.orders.remove(order)
+        order.delete()
+    
+    messages.success(request, "L'article a été supprimé du panier.")
+    # return HttpResponseRedirect(reverse("cart"))
+    return HttpResponseRedirect(reverse("products_description", kwargs={'slug' : slug}))
+
