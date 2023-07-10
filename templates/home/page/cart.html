@@ -13,7 +13,12 @@
             {% for order in orders  %}
             <h2>{{ order.product.name }}</h2>
             <img src="{{ order.product.image.url }}" alt="{{ order.product.name }}" style="max-width: 250px;"> <br />
-            <p>La quantité disponible est de : {{ order.quantity }}</p>
+            <p>Quantité commandée : {{ order.quantity }}</p>
+            <form method="POST" action="{% url 'cart-article-delete' slug=order.product.slug %}">
+                {% csrf_token %}
+                {% comment %} <button type="submit"></button> {% endcomment %}
+                <button type="submit" class="btn btn-primary mt-5" style="border-radius:20px"><i class="fa-regular fa-trash"></i> Supprimer l'article</span></button>
+                </form>
             {% endfor %}
             <!-- /article -->
         </div>

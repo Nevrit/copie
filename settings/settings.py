@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'fontawesomefree',
     'Home',
-    'django_autoslug',
     'store',
     'accounts',
     'mptt',
