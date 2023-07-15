@@ -20,3 +20,6 @@ def checkout(request):
     
     return render(request, 'home/pay/checkout.html', context)
 
+def payment_done(request):
+    render(request, 'home/pay/congrat.html')
+

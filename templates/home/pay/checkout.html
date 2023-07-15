@@ -5,18 +5,19 @@
 
 <div class="section">
     <div class="container">
-        <form>
+        <form action="{% url 'congratulation' %}" method="POST">
+            {% csrf_token %}
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="nom" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="nom">
+                        <input type="text" class="form-control" id="nom" name="nom">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="prenom" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="prenom">
+                        <input type="text" class="form-control" id="prenom" name="prenom">
                     </div>
                 </div>
             </div>
@@ -24,82 +25,73 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="telephone" class="form-label">Téléphone</label>
-                        <input type="tel" class="form-control" id="telephone">
+                        <input type="tel" class="form-control" id="telephone" name="telephone">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="autre_telephone" class="form-label">Autre téléphone</label>
-                        <input type="tel" class="form-control" id="autre_telephone">
+                        <input type="tel" class="form-control" id="autre_telephone" name="autre_telephone">
                     </div>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="adresse" class="form-label">Adresse</label>
-                <input type="text" class="form-control" id="adresse" >
-            </div>
+            <!-- <div class="mb-3">
+                <label for="adresse" class="form-label">Adresse de livrasion</label>
+                <input type="text" class="form-control" id="adresse" name="adresse">
+            </div> -->
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="region" class="form-label">Région</label>
-                        <input type="text" class="form-control" id="region">
+                        <label for="ville class="form-label">Ville</label>
+                        <input type="text" class="form-control" id="ville" name="ville">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="ville" class="form-label">Ville</label>
-                        <input type="text" class="form-control" id="ville" >
+                        <label for="adresse" class="form-label">Adresse de livraison</label>
+                        <input type="text" class="form-control" id="adresse" name="adresse">
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
-<div class="section">
-    <div class="container">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="products-tabs">
-                    <!-- tab -->
-                    <div id="tab1" class="tab-pane active">
-                        <div class="products-slick" data-nav="#slick-nav-1">
-                            <!-- product -->
-                            {% for item in items %}
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src='{{ item.product.image.url }}' alt=" {{ item.product.name }} ">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category"> {{ product.category }} </p>
-                                    <h3 class="product-name"><a href="#">{{ item.product.name }}</a></h3>
-                                    <h4 class="product-price">Quantité : {{ item.quantity }} </h4>
-                                    <h4 class="product-price">Prix : {{ item.product.price }} FCFA</h4>
-                                    <!-- JE DOIS GÉRER LES ANCIENS PRIX -->
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="products-tabs">
+                        <!-- tab -->
+                        <div id="tab1" class="tab-pane active">
+                            <div class="products-slick" data-nav="#slick-nav-1">
+                                <!-- product -->
+                                {% for item in items %}
+                                <div class="product">
+                                    <div class="product-img">
+                                        <img src='{{ item.product.image.url }}' alt=" {{ item.product.name }} ">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category"> {{ product.category }} </p>
+                                        <h3 class="product-name"><a href="#">{{ item.product.name }}</a></h3>
+                                        <h4 class="product-price">Quantité : {{ item.quantity }} </h4>
+                                        <h4 class="product-price">Prix : {{ item.product.price }} FCFA</h4>
+                                        <!-- JE DOIS GÉRER LES ANCIENS PRIX -->
+                                        <div class="product-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
                                     </div>
                                 </div>
+                                {% endfor %}
+                                <!-- /product -->
                             </div>
-                            {% endfor %}
-                            <!-- /product -->
+                            <div id="slick-nav-1" class="products-slick-nav"></div>
                         </div>
-                        <div id="slick-nav-1" class="products-slick-nav"></div>
+                        <!-- /tab -->
                     </div>
-                    <!-- /tab -->
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="section">
-    <div class="container">
-        <div class="col-6 col-md-12 col-xs-6 text-center cart-area-color">
-            <h3>Résumé de la commande</h3>
-            {% if items %}
+            <div class="col-6 col-md-12 col-xs-6 text-center cart-area-color">
+                <h3>Résumé de la commande</h3>
+                {% if items %}
                 <p>
                     Total articles : {{ items.count }}
                 </p>
@@ -112,16 +104,31 @@
                 <h4>
                     Total : {{ total_price }}
                 </h4>
-            {% endif %}
-            <!-- <br />
-            {% if commande %}
-                <p><span style="font-weight:bold">Prix panier</span>: {{ total_price }}</p>
-                <a href="{% url 'cart-delete' %}"><span style="font-size: 1em;"><i class="fa-regular fa-trash"></i> Supprimer le panier</span></a>
-            {% else %}
-                <p><span style="font-weight:bold">Votre panier est vide</span></p>
-            {% endif %} -->
-        </div>
+                {% endif %}
+            </div>
+            <div class="col-6 col-md-12 col-xs-6 text-center cart-area-color">
+                <h3>Mode de paiement</h3>
+                {% if items %}
+                <form method="POST" action="">
+                    <!-- ... autres champs du formulaire ... -->
+                    <div class="form-group">
+                        <label for="payment-method">Mode de paiement :</label>
+                        <select id="payment-method" name="payment_method" class="form-control">
+                            <option value="delivery">Paiement à la livraison</option>
+                            <option value="card">Paiement par carte bancaire</option>
+                            <option value="mobile_money">Paiement par mobile money</option>
+                        </select>
+                    </div>
+                    <!-- ... autres champs du formulaire ... -->
+                </form>
+                {% endif %}
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" style="border-radius:20px; margin-top: 50px;">
+                    Confirmer la commande
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}
-

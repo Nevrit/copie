@@ -45,7 +45,6 @@ def signup(request):
         gender = request.POST.get("gender")
         birthdate = request.POST.get("birthdate")
         
-        print(type(gender),' ', type(birthdate))
         # Si la request est égal à POST, on récupère les données des éléments (name) qui sont dans le formulaire signup.html
 
         # Creer un utilisateurs
