@@ -1,6 +1,6 @@
-{% extends "panel/base.html" %} 
-{% load static %} 
-{% block content %} 
+{% extends "panel/base.html" %}
+{% load static %}
+{% block content %}
 {% include "panel/header.html" %}
 
 <!-- SECTION -->
@@ -10,24 +10,43 @@
         <!-- row -->
         <div class="row gy-4 align-items-center">
             <!-- article -->
-            {% for order in orders  %}
+            {% for order in orders %}
             <h2>{{ order.product.name }}</h2>
             <img src="{{ order.product.image.url }}" alt="{{ order.product.name }}" style="max-width: 250px;"> <br />
             <p>Quantité commandée : {{ order.quantity }}</p>
             <form method="POST" action="{% url 'cart-article-delete' slug=order.product.slug %}">
                 {% csrf_token %}
                 {% comment %} <button type="submit"></button> {% endcomment %}
-                <button type="submit" class="btn btn-primary mt-5" style="border-radius:20px"><i class="fa-regular fa-trash"></i> Supprimer l'article</span></button>
-                </form>
+                <button type="submit" class="btn btn-primary mt-5" style="border-radius:20px"><i
+                        class="fa-regular fa-trash"></i> Supprimer l'article</span>
+                </button>
+            </form>
             {% endfor %}
             <!-- /article -->
         </div>
         <div>
-            <a href="{% url 'cart-delete' %}"><span style="font-size: 1.5em;"><i class="fa-regular fa-trash"></i> Supprimer le panier</span></a>
+            <a href="{% url 'cart-delete' %}"><span style="font-size: 1.5em;"><i class="fa-regular fa-trash"></i>
+                    Supprimer le panier</span></a>
         </div>
         <!-- /row -->
+        <!-- Boutton payé -->
+        {% if orders %}
+        <div class="btn-commander">
+            <a href="{% url 'checkout-pay' %}">
+                <span style="font-size: 1em;">
+                    <button type="submit" class="btn btn-primary mt-5" style="border-radius:20px">
+                        COMMANDER
+                    </button>
+                </span>
+            </a>
+        </div>
+        {% endif %}
+        <!-- Boutton payé -->
     </div>
     <!-- /container -->
+
+
+
 </div>
 <!-- /SECTION -->
 {% include "panel/footer.html" %} {% endblock content %}

@@ -3,25 +3,27 @@
 <!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
-    <div id="top-header">
-        <div class="container">
-            <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
-            </ul>
-            <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'signin' %}"><i class="fa fa-user-o"></i> {{ user.username }} </a></li>
-                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Déconnexion </a></li>
-                {% else %}
-                <li><a href="{% url 'signin' %}"><i class="fa fa-user-o"></i> Se connecter</a></li>
-                {% endif %}
+    {% if request.path != '/cart/checkout/' %}
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+                    <li><a href="#"><i class="fa fa-phone"></i> {{ user.telephone }} </a></li>
+                    <li><a href="#"><i class="fa fa-envelope-o"></i> {{ user.email }}</a></li>
+                    <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                </ul>
+                <ul class="header-links pull-right">
+                    <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'signin' %}"><i class="fa fa-user-o"></i> {{ user.last_name }} </a></li>
+                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Déconnexion </a></li>
+                    {% else %}
+                    <li><a href="{% url 'signin' %}"><i class="fa fa-user-o"></i> Se connecter</a></li>
+                    {% endif %}
 
-            </ul>
+                </ul>
+            </div>
         </div>
-    </div>
+    {% endif %}
     <!-- /TOP HEADER -->
 
     <!-- MAIN HEADER -->
@@ -41,59 +43,100 @@
                 <!-- /LOGO -->
 
                 <!-- SEARCH BAR -->
-                <div class="col-md-6">
-                    <div class="header-search">
-                        <form>
-                            <select class="input-select">
-                                <option value="0">Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
-                            </select>
-                            <input class="input" placeholder="Rechercher ici">
-                            <button class="search-btn">Rechercher</button>
-                        </form>
+                {% if request.path != '/cart/checkout/' %}
+                    <div class="col-md-6">
+                        <div class="header-search">
+                            <form>
+                                <select class="input-select">
+                                    <option value="0">Categories</option>
+                                    <option value="1">Category 01</option>
+                                    <option value="1">Category 02</option>
+                                </select>
+                                <input class="input" placeholder="Rechercher ici">
+                                <button class="search-btn">Rechercher</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                {% else %}
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <h3 style="color: antiquewhite;">
+                                Passez votre commande
+                            </h3>
+                        </div>
+                    </div>
+                {% endif %}
                 <!-- /SEARCH BAR -->
 
                 <!-- ACCOUNT -->
-                <div class="col-md-3 clearfix">
-                    <div class="header-ctn">
-                        <!-- Wishlist -->
-                        <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Vos envies</span>
-                                <div class="qty">2</div>
-                            </a>
-                        </div>
-                        <!-- /Wishlist -->
+                {% if request.path != '/cart/checkout/' %}
+                    <div class="col-md-3 clearfix">
+                        <div class="header-ctn">
+                            <!-- Wishlist -->
+                            <div>
+                                <a href="#">
+                                    <i class="fa fa-heart-o"></i>
+                                    <span>Vos envies</span>
+                                    <div class="qty">2</div>
+                                </a>
+                            </div>
+                            <!-- /Wishlist -->
 
-                        <!-- Cart -->
-                        <div>
-                            {% if user.cart %}
-                            <a href="{% url 'cart' %}">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>Votre panier</span>
-                                <div class="qty">
-                                    {{ user.cart.orders.count }}
-                                </div>
-                            </a>
-                            {% endif %}
-                            
-                        </div>
-                        <!-- /Cart -->
+                            <!-- Cart -->
+                            <div>
+                                {% if user.cart %}
+                                <a href="{% url 'cart' %}">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span>Votre panier</span>
+                                    <div class="qty">
+                                        {{ user.cart.orders.count }}
+                                    </div>
+                                </a>
+                                {% endif %}
+                                
+                            </div>
+                            <!-- /Cart -->
 
-                        <!-- Menu Toogle -->
-                        <div class="menu-toggle">
-                            <a href="#">
-                                <i class="fa fa-bars"></i>
-                                <span>Menu</span>
-                            </a>
+                            <!-- Menu Toogle -->
+                            <div class="menu-toggle">
+                                <a href="#">
+                                    <i class="fa fa-bars"></i>
+                                    <span>Menu</span>
+                                </a>
+                            </div>
+                            <!-- /Menu Toogle -->
                         </div>
-                        <!-- /Menu Toogle -->
                     </div>
-                </div>
+                {% else %}
+                    <div class="col-md-3 clearfix">
+                        <div class="header-ctn">
+                            <!-- Wishlist -->
+                            <div>
+                                <a href="#">
+                                    <span>Appellez-nous</span>
+                                </a>
+                            </div>
+                            <!-- /Wishlist -->
+
+                            <!-- Cart -->
+                            <div>
+                                <a href="#">
+                                    <span>Retours faciles</span>
+                                </a>
+                            </div>
+                            <!-- /Cart -->
+
+                            <!-- Menu Toogle -->
+                            <div class="menu-toggle">
+                                <a href="#">
+                                    <i class="fa fa-bars"></i>
+                                    <span>Menu</span>
+                                </a>
+                            </div>
+                            <!-- /Menu Toogle -->
+                        </div>
+                    </div>    
+                {% endif %}
                 <!-- /ACCOUNT -->
             </div>
             <!-- row -->

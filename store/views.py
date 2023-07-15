@@ -11,7 +11,7 @@ def add_to_cart(request, slug):
     user = request.user # On récupère les informations du client
     product = get_object_or_404(Product, slug=slug) # On récupère le slug du produit s'il existe sinon on lève une erreur
     cart, _ = Cart.objects.get_or_create(user=user) # On récupère le panier de l'utilisateur s'il existe sinon on le crée
-    order, created = Order.objects.get_or_create(user=user, ordered = False, product=product) # On récupère la commande de l'utilisateur s'il existe sinon on le crée
+    order, created = Order.objects.get_or_create(user=user, product=product) # On récupère la commande de l'utilisateur s'il existe sinon on le crée
     
     # Si la commande n'existe pas, on la créée et on ajoute la commande sélectionnée
     if created:
@@ -36,9 +36,9 @@ def cart(request):
 def cart_delete(request):
     cart = request.user.cart
     if cart:
-        # cart.orders.all().delete()
+        cart.orders.all().delete()
         cart.delete()
-        # messages.success(request, "L'élément a été supprimé du panier.")
+        messages.success(request, "L'élément a été supprimé du panier.")
     return redirect(index)
 
 def cart_article_delete(request, slug):
@@ -57,4 +57,3 @@ def cart_article_delete(request, slug):
     messages.success(request, "L'article a été supprimé du panier.")
     # return HttpResponseRedirect(reverse("cart"))
     return HttpResponseRedirect(reverse("products_description", kwargs={'slug' : slug}))
-

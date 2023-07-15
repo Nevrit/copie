@@ -1,4 +1,7 @@
-{% extends "panel/base.html" %} {% load static %} {% block content %} {% include "panel/header.html" %}
+{% extends "panel/base.html" %}
+{% load static %}
+{% block content %}
+{% include "panel/header.html" %}
 
 <!-- SECTION -->
 <div class="section">
@@ -10,50 +13,48 @@
             <div class="col-md-6 col-xs-6 l">
                 <form action="" method="post">
                     {% csrf_token %}
-                    <h4 class="text-center">S'il vous plaît connectez-vous à votre compte</h4>
-                    <div class="form-group">
-                        <label for="username">Nom d'utilisateur :</label>
-                        <input type="text" class="form-control" id="first_name" name="username">
-                    </div>
-                    <div class="last_name">
-                        <label for="username">Prenom :</label>
-                        <input type="text" class="form-control" id="first_name" name="last_name">
-                    </div>
-                    <div class="form-group">
-                        <label for="first_name">Nom :</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name">
-                    </div>
+                    <h4 class="text-center">Créer un nouveau compte</h4>
                     <div class="form-group">
                         <label for="email">Email :</label>
-                        <input type="email" class="form-control" id="email" name="email">
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Mot de passe :</label>
+                        <label for="password">Nouveau mot de passe :</label>
                         <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <div class="last_name">
+                        <label for="last_name">Nom :</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Prenom :</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" required>
                     </div>
                     <div class="form-group">
                         <label for="telephone">Téléphone :</label>
                         <input type="tel" class="form-control" id="telephone" name="telephone">
                     </div>
                     <div class="form-group">
-                        <label for="city">Ville :</label>
-                        <input type="text" class="form-control" id="city" name="city">
+                        <label for="gender">Genre :</label>
+                        <select class="form-control" id="gender" name="gender">
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="address">Adresse :</label>
-                        <input type="text" class="form-control" id="address" name="address">
+                        <label for="birthdate">Date de naissance :</label>
+                        <input type="date" class="form-control" id="birthdate" name="birthdate">
                     </div>
+                    
                     <div>
                         <button type="submit" class="btn btn-primary" style="width: 100%;">S'incrire</button>
                         <p style="margin-top: 10px">
                             <a href="">Mot de passe oublié ?</a>
                         </p>
-                        <p style="margin-top: 10px">Pas encore de compte ?
-                            <a href="">Inscrivez vous !</a>
+                        <p style="margin-top: 10px">Vous avez déjà un compte ?
+                            <a href="">Connectez vous !</a>
                         </p>
                     </div>
-
-
                 </form>
             </div>
             <div class="col-md-6 col-xs-6 box-shadow">
@@ -89,4 +90,5 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
-{% include "panel/footer.html" %} {% endblock content %}
+{% include "panel/footer.html" %}
+{% endblock content %}
