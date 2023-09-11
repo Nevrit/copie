@@ -16,7 +16,7 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['name']
     
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['user', 'product', 'quantity']
+    list_display = ['user', 'product', 'quantity', 'ordered']
     search_fields = ['user', 'product']
     
 class CartAdmin(admin.ModelAdmin):

@@ -15,7 +15,7 @@ def products_description(request, slug):
     
     # Afficher la commande du client connecté
     if request.user.is_authenticated:
-        commande = Order.objects.filter(user=request.user)
+        commande = Order.objects.filter(user=request.user, ordered=False)
         total_price = 0
         for order in commande:
             total_price += order.product.price * order.quantity
