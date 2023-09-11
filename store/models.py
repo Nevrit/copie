@@ -51,7 +51,7 @@ class Galery(models.Model):
 # Création de la galerie pour les images
     
 
-# Création des commandes des utilisateurs  
+# Création des éléments du panier utilisateur CART_ITEM
 class Order(models.Model):
     user = models.ForeignKey(AUTH_USER_MODEL ,on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -61,7 +61,7 @@ class Order(models.Model):
     
     def __str__(self):
         return f'{self.product.name} ({self.quantity})' 
-# Création des commandes des utilisateurs  
+# Création des éléments du panier utilisateur CART_ITEM
 
 # Création du panier de l'utilisateur, un utilisateur aura un panier  
 class Cart(models.Model):
@@ -80,3 +80,40 @@ class Cart(models.Model):
     #     self.orders.clear()
     #     super().delete(*args, **kwargs)
 # Création du panier de l'utilisateur, un utilisateur aura un panier 
+
+
+# Les commandes de l'utilisateur
+class OrderOrder(models.Model):
+    user = models.ForeignKey(AUTH_USER_MODEL ,on_delete=models.CASCADE)
+    lastname = models.CharField(max_length=255, verbose_name="Nom de famille")
+    firstname = models.CharField(max_length=255, verbose_name="Prénom")
+    telephone = models.CharField(max_length=20, verbose_name="Téléphone")
+    another_phone = models.CharField(max_length=20, blank=True, null=True, verbose_name="Autre téléphone")
+    city = models.CharField(max_length=255, verbose_name="Ville")
+    delivery_address = models.CharField(max_length=512, verbose_name="Adresse de livraison")
+    ordered_date = models.DateTimeField(blank=True, null=True)
+    
+    # Optionnel je peux afficher le montant total de la commande
+
+    def __str__(self):
+        return f"Commande de {self.firstname} {self.lastname}"
+
+    class Meta:
+        verbose_name = "Commande d'utilisateur"
+        verbose_name_plural = "Commandes d'utilisateurs"
+# Les commandes de l'utilisateur
+
+
+# Récupération des articles contenues dans le panier Ordered_Item
+class OrderedItem(models.Model):
+    user = models.ForeignKey(AUTH_USER_MODEL ,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    order_id = models.ForeignKey(OrderOrder, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    price = models.FloatField(default=0.0)
+    total = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.product.name} ({self.quantity})'
+# Récupération des articles contenues dans le panier Ordered_Item
+

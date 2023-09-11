@@ -2,7 +2,7 @@ from ipaddress import summarize_address_range
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.utils import timezone
-from store.models import Cart,Order
+from store.models import Cart,Order, OrderOrder, OrderedItem
 
 # Create your views here.
 
@@ -16,22 +16,41 @@ def checkout(request):
     context = {'cart_user': cart_user, 'items': items, 'total_price': total_price}
 
     if request.method == 'POST':
-        # Récupérer la date du jour
-        ordered_date = timezone.now()
+        # Récupérer les données de la requête POST
+        lastname = request.POST.get('nom')
+        firstname = request.POST.get('prenom')
+        telephone = request.POST.get('telephone')
+        another_phone = request.POST.get('autre_telephone')
+        city = request.POST.get('ville')
+        delivery_address = request.POST.get('adresse')
 
-        # Mettre à jour chaque article du panier pour indiquer qu'il a été commandé
+        # Créer une nouvelle commande conformément au modèle OrderOrder
+        order = OrderOrder.objects.create(
+            user=request.user,
+            lastname=lastname,
+            firstname=firstname,
+            telephone=telephone,
+            another_phone=another_phone,
+            city=city,
+            delivery_address=delivery_address,
+            # total=total_price,  # Vous pouvez ajuster cela en fonction de votre logique de calcul du total
+            ordered_date=timezone.now()
+        )
+
+       # Récupération des éléments du panier 
         for item in items:
-            item.ordered = True
-            item.ordered_date = ordered_date
-            item.save()
-
-        # Réinitialiser le panier en retirant tous les articles
-        cart_user.orders.clear()
-        cart_user.ordered = False
-        cart_user.ordered_date = None
-        cart_user.save()
-
-        # Rediriger l'utilisateur vers une autre page après le traitement réussi
+            order_item = OrderedItem()
+            order_item.product = item.product
+            order_item.order_id = order
+            order_item.user = request.user
+            order_item.price = item.product.price
+            order_item.quantity = item.quantity
+            order_item.total = item.quantity * item.product.price
+            
+            order_item.save()
+       # Récupération des éléments du panier 
+        cart_user.delete()
+       # Rediriger l'utilisateur vers une autre page après le traitement réussi
         return redirect(payment_done)
     else:
         print('Nevrit')
