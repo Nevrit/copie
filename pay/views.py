@@ -2,13 +2,15 @@ from ipaddress import summarize_address_range
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.utils import timezone
-from store.models import Cart,Order, OrderOrder, OrderedItem
+from store.models import Cart, Order, OrderOrder, OrderedItem
+
 
 # Create your views here.
 
 def checkout(request):
     cart_user = get_object_or_404(Cart, user=request.user)
     items = cart_user.orders.all()
+    paniers = Order.objects.filter(user=request.user)
     total_price = 0
     for item in items:
         total_price += item.product.price * item.quantity
@@ -37,7 +39,7 @@ def checkout(request):
             ordered_date=timezone.now()
         )
 
-       # Récupération des éléments du panier 
+        # Récupération des éléments du panier
         for item in items:
             order_item = OrderedItem()
             order_item.product = item.product
@@ -46,11 +48,11 @@ def checkout(request):
             order_item.price = item.product.price
             order_item.quantity = item.quantity
             order_item.total = item.quantity * item.product.price
-            
+
             order_item.save()
-       # Récupération des éléments du panier 
-        cart_user.delete()
-       # Rediriger l'utilisateur vers une autre page après le traitement réussi
+        # Récupération des éléments du panier
+        paniers.delete()
+        # Rediriger l'utilisateur vers une autre page après le traitement réussi
         return redirect(payment_done)
     else:
         print('Nevrit')
@@ -60,4 +62,3 @@ def checkout(request):
 
 def payment_done(request):
     return render(request, 'home/pay/congrat.html')
-
