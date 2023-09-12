@@ -10,42 +10,42 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="nom" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="nom" name="nom">
+                        <label for="nom" class="form-label">Nom *</label>
+                        <input type="text" class="form-control" id="nom" name="nom" value="{{ user.last_name }}" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="prenom" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="prenom" name="prenom">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="telephone" class="form-label">Téléphone</label>
-                        <input type="tel" class="form-control" id="telephone" name="telephone">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="autre_telephone" class="form-label">Autre téléphone</label>
-                        <input type="tel" class="form-control" id="autre_telephone" name="autre_telephone">
+                        <label for="prenom" class="form-label">Prénom *</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" value="{{ user.first_name }}" required>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="ville class=" form-label">Ville</label>
-                        <input type="text" class="form-control" id="ville" name="ville">
+                        <label for="telephone" class="form-label">Téléphone *</label>
+                        <input type="tel" class="form-control" id="telephone" name="telephone" value="{{ user.telephone }}" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="adresse" class="form-label">Adresse de livraison</label>
-                        <input type="text" class="form-control" id="adresse" name="adresse">
+                        <label for="autre_telephone" class="form-label">Autre Contact *</label>
+                        <input type="tel" class="form-control" id="autre_telephone" name="autre_telephone" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="ville class=" form-label">Ville *</label>
+                        <input type="text" class="form-control" id="ville" name="ville" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="adresse" class="form-label">Adresse de livraison *</label>
+                        <input type="text" class="form-control" id="adresse" name="adresse" required>
                     </div>
                 </div>
             </div>
@@ -111,9 +111,9 @@
                         <div class="form-group">
                             <label for="payment-method">Mode de paiement :</label>
                             <select id="payment-method" name="payment_method" class="form-control">
-                                <option value="delivery">Paiement à la livraison</option>
-                                <option value="card">Paiement par carte bancaire</option>
-                                <option value="mobile_money">Paiement par mobile money</option>
+                                <option value="Paiement à la livraison">Paiement à la livraison</option>
+                                <option value="Paiement par carte bancaire">Paiement par carte bancaire</option>
+                                <option value="Paiement par mobile money">Paiement par mobile money</option>
                             </select>
                             <!-- ... autres champs du formulaire ... -->
                         </div>

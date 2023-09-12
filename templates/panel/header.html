@@ -14,7 +14,7 @@
                 <ul class="header-links pull-right">
                     <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'signin' %}"><i class="fa fa-user-o"></i> {{ user.last_name }} </a></li>
+                    <li><a href="{% url 'account-manage' %}"><i class="fa fa-user-o"></i> {{ user.last_name }} </a></li>
                     <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Déconnexion </a></li>
                     {% else %}
                     <li><a href="{% url 'signin' %}"><i class="fa fa-user-o"></i> Se connecter</a></li>

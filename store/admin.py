@@ -28,8 +28,8 @@ class CartAdmin(admin.ModelAdmin):
 
 
 class OrderOrderAdmin(admin.ModelAdmin):
-    list_display = ['user', 'lastname', 'firstname', 'telephone', 'another_phone', 'city']
-    search_fields = ['user', 'lastname', 'firstname', 'telephone', 'another_phone', 'city']
+    list_display = ['user', 'lastname', 'firstname', 'telephone', 'another_phone', 'city', 'delivery_address', 'payment_method']
+    search_fields = ['user', 'lastname', 'firstname', 'telephone', 'another_phone', 'city', 'delivery_address', 'payment_method']
 
 
 class OrderedItemAdmin(admin.ModelAdmin):

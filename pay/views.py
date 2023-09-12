@@ -2,6 +2,7 @@ from ipaddress import summarize_address_range
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.utils import timezone
+
 from store.models import Cart, Order, OrderOrder, OrderedItem
 
 
@@ -12,10 +13,11 @@ def checkout(request):
     items = cart_user.orders.all()
     paniers = Order.objects.filter(user=request.user)
     total_price = 0
+
     for item in items:
         total_price += item.product.price * item.quantity
 
-    context = {'cart_user': cart_user, 'items': items, 'total_price': total_price}
+    context = {'cart_user': cart_user, 'items': items, 'total_price': total_price,}
 
     if request.method == 'POST':
         # Récupérer les données de la requête POST
@@ -25,6 +27,7 @@ def checkout(request):
         another_phone = request.POST.get('autre_telephone')
         city = request.POST.get('ville')
         delivery_address = request.POST.get('adresse')
+        payment_method = request.POST.get('payment_method')
 
         # Créer une nouvelle commande conformément au modèle OrderOrder
         order = OrderOrder.objects.create(
@@ -35,7 +38,8 @@ def checkout(request):
             another_phone=another_phone,
             city=city,
             delivery_address=delivery_address,
-            # total=total_price,  # Vous pouvez ajuster cela en fonction de votre logique de calcul du total
+            payment_method=payment_method,
+            # total=total_price,
             ordered_date=timezone.now()
         )
 
@@ -54,8 +58,6 @@ def checkout(request):
         paniers.delete()
         # Rediriger l'utilisateur vers une autre page après le traitement réussi
         return redirect(payment_done)
-    else:
-        print('Nevrit')
 
     return render(request, 'home/pay/checkout.html', context)
 

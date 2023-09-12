@@ -70,4 +70,7 @@ def signup(request):
 
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect(reverse(index)) 
+    return HttpResponseRedirect(reverse(index))
+
+def account_manage(request):
+    return render(request, 'account/account_manage.html')

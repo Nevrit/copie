@@ -68,7 +68,7 @@ class Order(models.Model):
 
     def __str__(self):
         return f'{self.product.name} ({self.quantity})'
-    # Création des éléments du panier utilisateur CART_ITEM
+# Création des éléments du panier utilisateur CART_ITEM
 
 
 # Création du panier de l'utilisateur, un utilisateur aura un panier
@@ -78,16 +78,6 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.user.email
-
-    # def delete(self, *args, **kwargs):
-    #     for order in self.orders.all():
-    #         order.ordered = True
-    #         order.ordered_date = timezone.now()
-    #         order.save()
-    #         self.orders.clear()
-    #     super().delete(*args, **kwargs)
-
-
 # Création du panier de l'utilisateur, un utilisateur aura un panier
 
 
@@ -100,6 +90,7 @@ class OrderOrder(models.Model):
     another_phone = models.CharField(max_length=20, blank=True, null=True, verbose_name="Autre téléphone")
     city = models.CharField(max_length=255, verbose_name="Ville")
     delivery_address = models.CharField(max_length=512, verbose_name="Adresse de livraison")
+    payment_method = models.CharField(max_length=100, verbose_name="Methode de paiement")
     ordered_date = models.DateTimeField(blank=True, null=True)
 
     # Optionnel je peux afficher le montant total de la commande
