@@ -89,3 +89,11 @@ def account_orders(request):
     ordered_items = OrderedItem.objects.filter(user=user)
     context = {'ordered_items': ordered_items}
     return render(request, 'account/account_manage_orders.html', context)
+
+
+def account_orders_details(request, pk):
+    user = request.user
+    order = get_object_or_404(OrderedItem, pk=pk)
+    context = {'order': order}
+    print(order)
+    return render(request, 'account/account_manage_orders_details.html', context)

@@ -38,15 +38,7 @@
                 <div class="row">
                     {% for i in ordered_items %}
                     <div class="col-md-3 col-xs-6">
-                        <!-- Utilisez la classe col-md-3 (ou d'autres classes de colonnes) pour définir la largeur de chaque article -->
-                        <p>
-                            <img src="{{ i.product.image.url }}" alt="{{ i.product.name }}" width="100%">
-                            <span class="">
-                                <a href="{% url 'account-orders-details' pk=i.id %}">
-                                    Détails
-                                </a>
-                            </span>
-                        </p>
+                        pass
                     </div>
                     {% endfor %}
                 </div>
