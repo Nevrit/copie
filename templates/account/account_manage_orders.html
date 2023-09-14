@@ -34,21 +34,24 @@
                 </div>
             </div>
             <div class="col-md-8 col-xs-6">
-                <h4>
-                    Vos commandes
-                </h4>
-                {% for i in ordered_items %}
-                <div class="card">
-                    <img src=" {{ i.product.image.url }} " class="card-img-top" width="100%"
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h4>Vos commandes</h4>
+                <div class="row">
+                    {% for i in ordered_items %}
+                    <div class="col-md-3 col-xs-6">
+                        <!-- Utilisez la classe col-md-3 (ou d'autres classes de colonnes) pour définir la largeur de chaque article -->
+                        <p>
+                            <img src="{{ i.product.image.url }}" alt="{{ i.product.name }}" width="100%">
+                            <span class="">
+                                <a href="">
+                                    Détails
+                                </a>
+                            </span>
+                        </p>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
+
             <!-- /article -->
         </div>
         <!-- /row -->
