@@ -56,7 +56,6 @@ Table OF Contents
 /*----------------------------*\
 	Typography
 \*----------------------------*/
-
 body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
@@ -2312,4 +2311,7 @@ Nev part
 }
 .compte {
     margin-bottom:20px
+}
+.bold-title{
+    font-weight:bold;
 }

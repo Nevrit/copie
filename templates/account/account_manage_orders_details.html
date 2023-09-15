@@ -34,15 +34,79 @@
                 </div>
             </div>
             <div class="col-md-8 col-xs-6">
-                <h4>Vos commandes</h4>
-                <div class="row">
-                    {% for i in ordered_items %}
-                    <div class="col-md-3 col-xs-6">
-                        pass
+                <h3>Détails de la commande</h3>
+                {% if order %}
+                <h5>
+
+                </h5>
+                <div class="cart-area-colors">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <img src="{{ order.product.image.url }}" width="350" alt="{{ order.product.name }}">
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+
+                                <span class="bold-title">Commande N°</span> : {{order.pk}}
+                                <br/>
+                                <span class="bold-title">Nom de l'article :</span> {{ order.product.name }}
+                                <br/>
+                                <span class="bold-title">Quantité :</span> {{order.quantity}} Article(s)
+                                <br/>
+                                <span class="bold-title">Achat effectué le :</span> {{ order.order_id.ordered_date }}
+                                <br/>
+                                <span class="bold-title">Etat :</span> Livré
+                                <br/>
+                                <span class="bold-title">Total :</span> {{ order.total }} FCFA
+                            </p>
+                        </div>
                     </div>
-                    {% endfor %}
                 </div>
+                <div class="cart-area-colors">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="text-uppercase">
+                                paiement
+                            </h3>
+                            <p>
+                                <span class="bold-title">Mode de paiement :</span> {{order.order_id.payment_method}}
+                            </p>
+                            <p>
+                                <span class="bold-title">Détail du paiement :</span> {{order.price}} <br/> <span
+                                    class="bold-title">Sous-total :</span> {{order.total}}
+                                <br/> <span class="bold-title">Livraison :</span> 200
+                            </p>
+                            <p>
+                                <span class="bold-title">Total :</span> {{order.total}}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="text-uppercase">
+                                livraison
+                            </h3>
+                            <p>
+                                <span class="bold-title"> Méthode de livraison :</span> Livraison
+                            </p>
+                            <p>
+                                <span class="bold-title">Détails d'expédition :</span> Livré sous 7 jours (Jours
+                                ouvrables)
+                            </p>
+                            <p>
+                                <span class="bold-title">Adresse de livraison :</span> {{
+                                order.order_id.delivery_address}}
+                            </p>
+                            <p>
+                                <span class="bold-title">Telephone :</span> {{ order.order_id.telephone }}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             </div>
+
 
             <!-- /article -->
         </div>
