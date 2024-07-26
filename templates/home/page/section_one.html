@@ -7,7 +7,7 @@
         <!-- row -->
         <div class="row">
             <!-- shop -->
-            {% for product in product|slice:":3" %}
+            {% for product in product|slice:6 %}
             <div class="col-md-4 col-xs-6">
                 <div class="shop">
                     <div class="shop-img">
@@ -15,12 +15,11 @@
                     </div>
                     <div class="shop-body">
                         <h3> {{ product.name }} </h3>
-                        <a href="{% url 'products_description' product.slug %}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{% url 'products_description' product.slug %}" class="cta-btn">Achetez <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
             {% endfor %}
-
             <!-- /shop -->
         </div>
         <!-- /row -->

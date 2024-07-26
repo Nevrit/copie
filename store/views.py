@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from store.models import Cart, Order, Product
+from store.models import Cart, Order, Product, WishList, WhishListItem
 from django.contrib import messages
 from django.shortcuts import redirect
 from Home.views import index
@@ -32,10 +32,29 @@ def add_to_cart(request, slug):
     return HttpResponseRedirect(reverse("products_description", kwargs={'slug': slug}))
 
 
+def add_to_whishlist(request, slug):
+    user = request.user # Récupère les informations de l'utilisateur
+    product = get_object_or_404(Product, slug=slug)
+    wishlist, _ = WishList.objects.get_or_create(user=user)
+    whishList_item, created = WhishListItem.objects.get_or_create(user=user, product=product)
+    
+    if created:
+        wishlist.products.add(product)
+        wishlist.save()
+    else:
+        pass
+    
+    return HttpResponseRedirect(reverse("wishlist"))
+
 # Gestion du panier
 def cart(request):
     cart = get_object_or_404(Cart, user=request.user)
     return render(request, 'home/page/cart.html', context={"orders": cart.orders.all()})
+
+
+def wishlist(request):
+    wishlist_cart = get_object_or_404(WishList, user=request.user)
+    return render(request, 'home/page/wishlist.html', context = {'products': wishlist_cart.products.all()})
 
 
 def cart_delete(request):

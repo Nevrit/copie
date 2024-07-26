@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/home/nevghost/Documents/Projet informatique/django e-commerce/env/bin/python3.10" "$0" "$@"
-' '''
+#!/home/nev/Documents/Code/Django/copie/env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

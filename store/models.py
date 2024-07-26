@@ -68,8 +68,14 @@ class Order(models.Model):
 
     def __str__(self):
         return f'{self.product.name} ({self.quantity})'
-# Création des éléments du panier utilisateur CART_ITEM
 
+# Création des éléments de la liste des envies de l'utilisateur WHISHLIST_ITEM
+class WhishListItem(models.Model):
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.product.name})'
 
 # Création du panier de l'utilisateur, un utilisateur aura un panier
 class Cart(models.Model):
@@ -78,7 +84,18 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.user.email
+
+
 # Création du panier de l'utilisateur, un utilisateur aura un panier
+
+# Création de la liste de souhait de l'utilisateur, un utilisateur aura un panier à souhait
+class WishList(models.Model):
+    user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)
+
+    def __str__(self):
+        return self.user.email
+
 
 
 # Les commandes de l'utilisateur

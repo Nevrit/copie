@@ -17,7 +17,7 @@ def checkout(request):
     for item in items:
         total_price += item.product.price * item.quantity
 
-    context = {'cart_user': cart_user, 'items': items, 'total_price': total_price,}
+    context = {'cart_user': cart_user, 'items': items, 'total_price': total_price, }
 
     if request.method == 'POST':
         # Récupérer les données de la requête POST

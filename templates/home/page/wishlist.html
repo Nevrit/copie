@@ -1,0 +1,55 @@
+{% extends "panel/base.html" %}
+{% load static %}
+{% block content %}
+{% include "panel/header.html" %}
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- article -->
+            {% for product in products %}
+            <div class="col-md-4 col-xs-6" style="margin-bottom: 30px;">
+                <h4>{{ product.name }}</h4>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 300px;"> <br />
+                <div class="button-delete-or-purchase" style="margin-top: 10px;">
+                    <a href="">
+                        <button type="button" class="btn btn-success">Acheter</button>
+                    </a>
+                    <a href="">
+                        <button type="button" class="btn btn-link">Supprimer</button>
+                    </a>
+                </div>
+            </div>
+
+            {% endfor %}
+            <!-- /article -->
+        </div>
+        <!-- <div>
+            <a href="{% url 'cart-delete' %}"><span style="font-size: 1.5em;"><i class="fa-regular fa-trash"></i>
+                    Supprimer le panier</span></a>
+        </div> -->
+        <!-- /row -->
+        <!-- Boutton payé -->
+        {% if orders %}
+        <div class="btn-commander">
+            <a href="{% url 'checkout-pay' %}">
+                <span style="font-size: 1em;">
+                    <button type="submit" class="btn btn-primary mt-5" style="border-radius:20px">
+                        COMMANDER
+                    </button>
+                </span>
+            </a>
+        </div>
+        {% endif %}
+        <!-- Boutton payé -->
+    </div>
+    <!-- /container -->
+
+
+
+</div>
+<!-- /SECTION -->
+{% include "panel/footer.html" %} {% endblock content %}
