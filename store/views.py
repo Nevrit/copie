@@ -1,14 +1,17 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.http import HttpResponseRedirect # type: ignore
+from django.shortcuts import get_object_or_404, render # type: ignore
+from django.urls import reverse # type: ignore
 from store.models import Cart, Order, Product, WishList, WhishListItem
-from django.contrib import messages
-from django.shortcuts import redirect
-from Home.views import index
+from django.contrib import messages # type: ignore
+from django.shortcuts import redirect # type: ignore
+from Home.views import index, products_description
 
+current_url = ''
 
 # Création des informations du panier
 def add_to_cart(request, slug):
+    # current_url = request.resolver_match.view_name
+    # current_url_match = request.resolver_match
     user = request.user  # On récupère les informations du client
     product = get_object_or_404(Product,
                                 slug=slug)  # On récupère le slug du produit s'il existe sinon on lève une erreur
@@ -38,11 +41,8 @@ def add_to_whishlist(request, slug):
     wishlist, _ = WishList.objects.get_or_create(user=user)
     whishList_item, created = WhishListItem.objects.get_or_create(user=user, product=product)
     
-    if created:
-        wishlist.products.add(product)
-        wishlist.save()
-    else:
-        pass
+
+    wishlist.products.add(product)
     
     return HttpResponseRedirect(reverse("wishlist"))
 
@@ -82,3 +82,15 @@ def cart_article_delete(request, slug):
     messages.success(request, "L'article a été supprimé du panier.")
     # return HttpResponseRedirect(reverse("cart"))
     return HttpResponseRedirect(reverse("products_description", kwargs={'slug': slug}))
+
+
+
+def wishlist_article_delete(request, slug):
+    user = request.user
+    product = get_object_or_404(Product, slug=slug)
+    wishlist = get_object_or_404(WishList, user=user)
+    
+    wishlist.products.remove(product)
+    
+    messages.success(request, "L'article a été retiré de la liste d'envies.")
+    return HttpResponseRedirect(reverse("wishlist"))

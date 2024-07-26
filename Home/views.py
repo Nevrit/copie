@@ -1,5 +1,7 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render # type: ignore
 from store.models import Cart, Order, Product
+
+current_url = ''
 
 # Create your views here.
 def index(request):

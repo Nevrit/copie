@@ -11,18 +11,33 @@
         <div class="row">
             <!-- article -->
             {% for product in products %}
+            {% if product %}
             <div class="col-md-4 col-xs-6" style="margin-bottom: 30px;">
                 <h4>{{ product.name }}</h4>
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 300px;"> <br />
-                <div class="button-delete-or-purchase" style="margin-top: 10px;">
-                    <a href="">
-                        <button type="button" class="btn btn-success">Acheter</button>
-                    </a>
-                    <a href="">
-                        <button type="button" class="btn btn-link">Supprimer</button>
-                    </a>
+                <div class="button-delete-or-purchase" style="margin-top: 10px; margin-right: 10px;">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <a href="{% url 'add-to-cart' product.slug %}">
+                            <button type="button" class="btn btn-success">Acheter</button>
+                        </a>
+
+                        <a href="{% url 'wishlist-article-delete' slug=product.slug %}">
+                            <span style="font-size: 1em; color: red;"><i class="fa-regular fa-trash"></i>
+                                Supprimer</span>
+                            <!-- <button type="submit" class="btn btn-link">Supprimer</button> -->
+                        </a>
+                    </form>
                 </div>
             </div>
+            {% else %}
+            <div>
+                <h3 class="text-center">
+                    Aucun article dans votre liste de souhait
+                </h3>
+            </div>
+            {% endif %}
+
 
             {% endfor %}
             <!-- /article -->
